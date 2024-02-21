@@ -3,6 +3,8 @@
   "greeting": "مرحبًا بك",
   "change_language": "تغيير اللغة",
   "close_app": "إغلاق التطبيق",
-  "home": "الصفحه الرييسيه",
-  "save": "حفظ"
+  "home": "الصفحة الرئيسية",
+  "save": "حفظ",
+  "Go to languagePage": "تغيير اللغه",
+  "search": "بحث"
 }

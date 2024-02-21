@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:task/utils/string_manager.dart';
 
+import '../presention/screen/change_language.dart';
 import '../presention/screen/home.dart';
 import '../presention/screen/login.dart';
+import '../presention/screen/search.dart';
 
 class Routes {
 
   static const String loginRoute = '/';
   static const String homeRoute = '/home';
+  static const String languageScreen = '/LanguageScreen';
+  static const String search = '/Search';
+
 
 }
 
@@ -18,6 +23,10 @@ class RouteGenarator {
         return MaterialPageRoute(builder: (_) =>  SignInScreen());
       case Routes.homeRoute:
         return MaterialPageRoute(builder: (_) => HomePage());
+      case Routes.languageScreen:
+        return MaterialPageRoute(builder: (_) => LanguageScreen());
+      case Routes.search:
+        return MaterialPageRoute(builder: (_) => Search());
       default:
         return unDefinedRoute();
     }

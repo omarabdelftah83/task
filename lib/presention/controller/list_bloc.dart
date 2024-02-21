@@ -25,19 +25,6 @@ class ListBlock extends Bloc<BaseEvent, ListState> {
     });
 
 
-//////SearchEvent..1
-    on<SearchEvent>((event, emit) async {
-      final re = await getListUseCase.exeute();
-
-      re.fold(
-              (l) => emit(state.Copywith(
-            nowPlayingState: RequastStat.error,
-            masege: 'error',
-          )),
-              (r) => emit(state.Copywith(
-              nowPlayingList: r, nowPlayingState: RequastStat.loaded)));
-    });
-
 
   }
 }
