@@ -43,8 +43,7 @@ dependencies:
   http:
   freezed:
   lottie:
-
-
+  bloc_test:
   shared_preferences:
   flutter_phoenix:
   easy_localization:

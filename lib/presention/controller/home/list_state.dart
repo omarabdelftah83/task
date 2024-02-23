@@ -1,9 +1,7 @@
 
-
 import 'package:equatable/equatable.dart';
-
-import '../../domain/entites/list.dart';
-import '../../utils/enum.dart';
+import '../../../domain/entites/list.dart';
+import '../../../utils/enum.dart';
 
 
 class ListState extends Equatable{
@@ -56,29 +54,3 @@ class ListState extends Equatable{
 
 }
 
-class SearchState extends Equatable {
-  final List<Item> nowPlayingList;
-  final RequastStat nowPlayingState;
-  final String message;
-
-  const SearchState({
-    this.nowPlayingList = const [],
-    this.nowPlayingState = RequastStat.loading,
-    this.message = '',
-  });
-
-  @override
-  List<Object> get props => [nowPlayingList, nowPlayingState, message];
-
-  SearchState copyWith({
-    List<Item>? nowPlayingList,
-    RequastStat? nowPlayingState,
-    String? message,
-  }) {
-    return SearchState(
-      nowPlayingList: nowPlayingList ?? this.nowPlayingList,
-      nowPlayingState: nowPlayingState ?? this.nowPlayingState,
-      message: message ?? this.message,
-    );
-  }
-}

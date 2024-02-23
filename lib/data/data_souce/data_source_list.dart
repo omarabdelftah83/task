@@ -24,4 +24,5 @@ class ListRemoteDataSource implements BaseListRemoteDataSource {
       );
     }
   }
+
 }

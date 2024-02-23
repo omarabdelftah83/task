@@ -19,11 +19,11 @@ class CustomSearchField extends StatelessWidget {
         ),
         child:  Row(
           children: [
-            IconButton(
+            const IconButton(
               icon: Icon(Icons.search),
-              onPressed: null, // لا حاجة لعملية فتح البحث هنا
+              onPressed: null,
             ),
-            Text(
+            const Text(
               AppString.search,
               style: TextStyle(fontSize: 16),
             ).tr(),

@@ -6,5 +6,4 @@ abstract class BaseListRepository{
 
   Future<Either< Faluiare,List<ListApi>>> getListRepo();
 
-
 }

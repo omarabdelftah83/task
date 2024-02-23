@@ -1,15 +1,17 @@
+import 'dart:developer';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../domain/entites/list.dart';
-import '../../domain/usecase/get_list_useCase.dart';
-import '../../utils/enum.dart';
+import '../../../domain/entites/list.dart';
+import '../../../domain/usecase/get_list_useCase.dart';
+import '../../../utils/enum.dart';
 import 'list_event.dart';
 import 'list_state.dart';
 
 class ListBlock extends Bloc<BaseEvent, ListState> {
   final GetListUseCase getListUseCase;
-
+  List<ListApi>? nowPlayingList;
   ListBlock(this.getListUseCase) : super(ListState()) {
     //////event..1
     on<ListEvent>((event, emit) async {
@@ -20,8 +22,12 @@ class ListBlock extends Bloc<BaseEvent, ListState> {
                 nowPlayingState: RequastStat.error,
                 masege: 'error',
               )),
-          (r) => emit(state.Copywith(
-              nowPlayingList: r, nowPlayingState: RequastStat.loaded)));
+          (r) {
+            emit(state.Copywith(
+                nowPlayingList: r, nowPlayingState: RequastStat.loaded));
+            log("message aaa");
+            nowPlayingList =r;
+          });
     });
 
 

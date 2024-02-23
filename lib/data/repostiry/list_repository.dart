@@ -20,8 +20,9 @@ class ListRepository implements BaseListRepository{
     }
     on ServerExcepion catch (faluaire){
       left(ServerFaluiare(faluaire.errorMasage.stutesMassage));
-
       throw UnimplementedError();
     }
   }
+
+
 }

@@ -4,7 +4,8 @@ import '../../data/data_souce/data_source_list.dart';
 import '../../data/repostiry/list_repository.dart';
 import '../../domain/repositry/base_list_repo.dart';
 import '../../domain/usecase/get_list_useCase.dart';
-import '../../presention/controller/list_bloc.dart';
+import '../../presention/controller/home/list_bloc.dart';
+import '../../presention/controller/search/seach_bloc.dart';
 
 GetIt serLoc = GetIt.instance;
 class ServiesLcator{
@@ -19,4 +20,8 @@ class ServiesLcator{
     serLoc.registerLazySingleton(() =>GetListUseCase(serLoc()));
     /////////Ingection with the bloc
     serLoc.registerFactory(() => ListBlock(serLoc(),));
+    serLoc.registerFactory(() => SearchCubit());
+
+
+
   }}

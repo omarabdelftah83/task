@@ -11,3 +11,4 @@ class GetListUseCase{
     return await baseListRepository.getListRepo();
   }
 }
+

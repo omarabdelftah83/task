@@ -17,16 +17,15 @@ class CustomElevatedButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          primary: Colors.blue, // لون الخلفية
-          onPrimary: Colors.white, // لون النص
-         // المسافات الداخلية
+          primary: Colors.blue,
+          onPrimary: Colors.white,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10), // شكل الحواف
+            borderRadius: BorderRadius.circular(10),
           ),
         ),
         child: Text(
           buttonText,
-          style: TextStyle(fontSize: 16), // حجم النص
+          style: const TextStyle(fontSize: 16),
         ),
       ),
     );

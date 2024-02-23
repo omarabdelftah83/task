@@ -10,6 +10,16 @@ class AppString {
   static const contactUs = "contactUs";
   static const changeLanguage = "changeLanguage";
   static const search = "search";
+  static const enterYourEmail = 'Enter your Email';
+  static const enterYourPass = 'Enter your pass';
+  static const toast = 'Please enter your email and password';
+  static const rememberMe = 'Remember Me';
+  static const signIn = 'Sign in';
+  static const save = 'save';
+  static const arabic = 'arabic';
+  static const english = 'english';
+  static const changeLang = 'changeLang';
+
 
 
 }

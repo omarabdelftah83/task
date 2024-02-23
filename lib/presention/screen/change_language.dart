@@ -1,100 +1,96 @@
-import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-class LanguageScreen extends StatefulWidget {
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../controller/language/lang_bloc.dart';
+class LanguageScreen extends StatelessWidget {
   @override
-  _LanguageScreenState createState() => _LanguageScreenState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => LanguageCubit(),
+      child: LanguageView(),
+    );
+  }
 }
 
-class _LanguageScreenState extends State<LanguageScreen> {
-  late SharedPreferences _preferences;
-  bool _isCheckedArabic = false; // حالة المربع عند اختيار اللغة العربية
-  bool _isCheckedEnglish = false; // حالة المربع عند اختيار اللغة الإنجليزية
-
+class LanguageView extends StatefulWidget {
   @override
-  void initState() {
-    super.initState();
-    _initPreferences();
-  }
+  _LanguageViewState createState() => _LanguageViewState();
+}
 
-  Future<void> _initPreferences() async {
-    _preferences = await SharedPreferences.getInstance();
-    final languageCode = _preferences.getString('languageCode');
-    if (languageCode != null) {
-      setState(() {
-        if (languageCode == 'ar') {
-          _isCheckedArabic = true;
-          _isCheckedEnglish = false;
-        } else {
-          _isCheckedArabic = false;
-          _isCheckedEnglish = true;
-        }
-      });
-    }
-  }
+class _LanguageViewState extends State<LanguageView> {
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('app_title'.tr()), // استخدم ترجمة العنوان
+        title: Text('app_title'.tr()),
       ),
-      body: Column(
-        children: <Widget>[
-          const Padding(
-            padding: EdgeInsets.only(top: 50),
-            child: Text(
-              'Change Language',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          const SizedBox(height: 100,),
-          ListTile(
-            title: Text('arabic'.tr()), // ترجمة: العربية
-            leading: Checkbox(
-              value: _isCheckedArabic,
-              onChanged: (bool? value) {
-                setState(() {
-                  _isCheckedArabic = value!;
-                  _isCheckedEnglish = !_isCheckedArabic; // إلغاء تحديد اللغة الإنجليزية
-                });
-              },
-            ),
-          ),
-          ListTile(
-            title: Text('english'.tr()), // ترجمة: الإنجليزية
-            leading: Checkbox(
-              value: _isCheckedEnglish,
-              onChanged: (bool? value) {
-                setState(() {
-                  _isCheckedEnglish = value!;
-                  _isCheckedArabic = !_isCheckedEnglish; // إلغاء تحديد اللغة العربية
-                });
-              },
-            ),
-          ),
-          ElevatedButton(
-            onPressed: () async {
-              if (_isCheckedArabic) {
-                await _saveLanguage('ar');
-                context.setLocale(const Locale('ar', 'SA')); // تغيير اللغة إلى العربية
-              } else if (_isCheckedEnglish) {
-                await _saveLanguage('en');
-                context.setLocale(const Locale('en', 'US')); // تغيير اللغة إلى الإنجليزية
-              }
+      body: BlocBuilder<LanguageCubit, Language>(
+        builder: (context, state) {
+          final cubit = BlocProvider.of<LanguageCubit>(context);
+           return   LayoutBuilder(
+            builder: (context, size) {
+
+              return SizedBox(
+                width: size.maxWidth > 500 ? 400 : 400,
+                height: size.maxHeight > 700 ? 600 : 500,
+                child: Column(
+                  children: <Widget>[
+                    const Padding(
+                      padding: EdgeInsets.only(top: 50),
+                      child: Text(
+                        'Change Language',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 100,
+                    ),
+                    ListTile(
+                      title: Text('arabic'.tr()),
+                      leading: Radio(
+                        value: Language.arabic,
+                        groupValue: cubit.selectedLanguage,
+                        onChanged: (value) {
+                          setState(() {
+                            cubit.selectedLanguage = value as Language;
+                          });
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: Text('english'.tr()),
+                      leading: Radio(
+                        value: Language.english,
+                        groupValue: cubit.selectedLanguage,
+                        onChanged: (value) {
+                          setState(() {
+                            cubit.selectedLanguage = value as Language;
+                          });
+                        },
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () async {
+                        // Trigger language change only if a language is selected
+                        if (cubit.selectedLanguage != null) {
+                          context
+                              .read<LanguageCubit>()
+                              .changeLanguage(cubit.selectedLanguage!, context);
+                        }
+                      },
+                      child: Text('Save'.tr()),
+                    ),
+                  ],
+                ),
+              );
             },
-            child: Text('save'.tr()), // ترجمة: حفظ
-          ),
-        ],
+          );
+        },
       ),
     );
-  }
-
-  Future<void> _saveLanguage(String languageCode) async {
-    await _preferences.setString('languageCode', languageCode);
   }
 }

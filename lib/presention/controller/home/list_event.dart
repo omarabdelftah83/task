@@ -16,3 +16,4 @@ class SearchEvent extends BaseEvent {
   @override
   List<Object> get props => [searchTerm];
 }
+
