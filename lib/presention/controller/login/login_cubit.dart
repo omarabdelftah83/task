@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'login_state.dart';
 
-
-
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitial());
 
@@ -14,8 +12,9 @@ class LoginCubit extends Cubit<LoginState> {
 
   void getRememberMe() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    //باختصار، هذا السطر يقوم بجلب قيمة "تذكرني" المُخزنة في المفضلات، وإذا لم يتم العثور على قيمة مُخزنة، فإنه يعين قيمة افتراضية هي false.
     rememberMe = prefs.getBool('remember_me') ?? false;
-    if (rememberMe) {
+    if (rememberMe==true) {
       usernameController.text = prefs.getString('email') ?? '';
       passwordController.text = prefs.getString('password') ?? '';
     }

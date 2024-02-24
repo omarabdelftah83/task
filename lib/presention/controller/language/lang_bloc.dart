@@ -9,8 +9,7 @@ class LanguageCubit extends Cubit<Language> {
   LanguageCubit() : super(Language.english);
   Language? selectedLanguage;
 
-  Future<void> changeLanguage(
-      Language selectedLanguage, BuildContext context) async {
+  Future<void> changeLanguage(Language selectedLanguage, BuildContext context) async {
     switch (selectedLanguage) {
       case Language.arabic:
         await EasyLocalization.of(context)!.setLocale(const Locale('ar', 'SA'));

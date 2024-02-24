@@ -20,6 +20,7 @@ class ListApiModel extends ListApi {
         );
 
   factory ListApiModel.fromJson(Map<String, dynamic> json) {
+
     return ListApiModel(
       id: json['id'] as int,
       title: json['title'] as String,

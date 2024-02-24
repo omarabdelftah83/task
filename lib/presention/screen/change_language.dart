@@ -30,7 +30,6 @@ class _LanguageViewState extends State<LanguageView> {
           final cubit = BlocProvider.of<LanguageCubit>(context);
            return   LayoutBuilder(
             builder: (context, size) {
-
               return SizedBox(
                 width: size.maxWidth > 500 ? 400 : 400,
                 height: size.maxHeight > 700 ? 600 : 500,
@@ -77,9 +76,8 @@ class _LanguageViewState extends State<LanguageView> {
                       onPressed: () async {
                         // Trigger language change only if a language is selected
                         if (cubit.selectedLanguage != null) {
-                          context
-                              .read<LanguageCubit>()
-                              .changeLanguage(cubit.selectedLanguage!, context);
+
+                           cubit .changeLanguage(cubit.selectedLanguage!, context);
                         }
                       },
                       child: Text('Save'.tr()),

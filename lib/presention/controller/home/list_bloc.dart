@@ -12,8 +12,9 @@ import 'list_state.dart';
 class ListBlock extends Bloc<BaseEvent, ListState> {
   final GetListUseCase getListUseCase;
   List<ListApi>? nowPlayingList;
+
   ListBlock(this.getListUseCase) : super(ListState()) {
-    //////event..1
+    ///event..1
     on<ListEvent>((event, emit) async {
       final re = await getListUseCase.exeute();
 
@@ -25,8 +26,6 @@ class ListBlock extends Bloc<BaseEvent, ListState> {
           (r) {
             emit(state.Copywith(
                 nowPlayingList: r, nowPlayingState: RequastStat.loaded));
-            log("message aaa");
-            nowPlayingList =r;
           });
     });
 

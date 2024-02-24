@@ -7,48 +7,40 @@ import '../../../domain/entites/list.dart';
 import '../../../domain/usecase/get_list_useCase.dart';
 
 class SearchCubit extends Cubit<SearchState> {
-
+  final GetListUseCase getListUseCase;
   List<ListApi>? searchList;
   List<ListApi>? totalItems;
-  SearchCubit() : super(SearchInitial());
+  SearchCubit(this.getListUseCase) : super(SearchInitial());
 
-  final homeUseCase = serLoc<GetListUseCase>();
 
   getData() async {
     emit(SearchLoading());
-    final re = await homeUseCase.exeute();
-
+    final re = await getListUseCase.exeute();
     re.fold((l) {
       emit(SearchError(errorMessage: l.massege));
     }, (r) {
       searchList = r;
-      emit(SearchLoaded(searchList??[]));
+      emit(SearchLoaded(searchList ?? []));
     });
-
-    log("searchList ${searchList?.length}");
   }
-
 
   void search(String searchQuery) {
-      final query= searchQuery.toString().toLowerCase().trim();
-      if(query.isNotEmpty){
-        emit(SearchLoading());
-        List<ListApi> search=[];
-     //   final resuletList = searchList?.where((element) => element==query).toList();
-        searchList?.forEach((element) {
-            if(element.title.toString().toLowerCase().contains(query)||element.price.toString().toLowerCase().contains(query))
-            {
-              search.add(element);
-            }
-        });
+    /////الحروف متماثله
+    final query = searchQuery.toString().toLowerCase().trim();
+    if (query.isNotEmpty) {
+     // emit(SearchLoading());
+      List<ListApi> search = [];
 
-        emit(SearchLoaded(search));
-        log("click here 2${search.length}");
-      }else{
-        emit(SearchLoaded(searchList??[]));
-      }
+      searchList?.forEach((element) {
+        if (element.title.toString().toLowerCase().contains(query) ||
+            element.price.toString().toLowerCase().contains(query)) {
+          search.add(element);
+        }
+      });
 
+      emit(SearchLoaded(search));
+    } else {
+      emit(SearchLoaded(searchList ?? []));
+    }
   }
 }
-
-

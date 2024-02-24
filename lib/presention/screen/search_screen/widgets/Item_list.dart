@@ -16,28 +16,30 @@ class ItemsList extends StatelessWidget {
 
           if(state.searchResult.isEmpty){
             return const Center(child: Text("Not Foud"),);
+          }else{
+            return ListView.builder(
+              itemCount: state.searchResult.length,
+              itemBuilder: (BuildContext context, int index) {
+
+                return Card(
+                  child: ListTile(
+                    title: Text(
+                      state.searchResult[index].title??'',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    subtitle: Text( state.searchResult[index].description??''),
+                    trailing: Text('\$${state.searchResult[index].price.toStringAsFixed(2)}'),
+                  ),
+                );
+              },
+            );
           }
 
-          return ListView.builder(
-            itemCount: state.searchResult.length,
-            itemBuilder: (BuildContext context, int index) {
 
-              return Card(
-                child: ListTile(
-                  title: Text(
-                    state.searchResult[index].title??'',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  subtitle: Text( state.searchResult[index].description??''),
-                  trailing: Text('\$${state.searchResult[index].price.toStringAsFixed(2)}'),
-                ),
-              );
-            },
-          );
         } else {
           return const SizedBox.shrink();
         }

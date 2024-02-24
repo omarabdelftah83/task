@@ -8,12 +8,4 @@ abstract class BaseEvent extends Equatable {
 
 class ListEvent extends BaseEvent {}
 
-class SearchEvent extends BaseEvent {
-  final String searchTerm;
-
-  const SearchEvent(this.searchTerm);
-
-  @override
-  List<Object> get props => [searchTerm];
-}
 

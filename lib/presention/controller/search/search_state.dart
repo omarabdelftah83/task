@@ -11,7 +11,6 @@ class SearchLoading extends SearchState {}
 
 class SearchLoaded extends SearchState {
   List<ListApi> searchResult;
-
   SearchLoaded(this.searchResult);
 }
 

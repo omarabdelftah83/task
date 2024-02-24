@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-
+///Equatable===>compare to object..///
 class ListApi extends Equatable {
   final int id;
   final String title;
@@ -20,7 +20,6 @@ class ListApi extends Equatable {
 
   @override
   //TODO: implement props
-  List<Object?> get props =>
-      [id, title, description, price, discountPercentage, brand, category];
+  List<Object?> get props => [id, title, description, price, discountPercentage, brand, category];
 }
 

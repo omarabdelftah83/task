@@ -20,7 +20,7 @@ class ServiesLcator{
     serLoc.registerLazySingleton(() =>GetListUseCase(serLoc()));
     /////////Ingection with the bloc
     serLoc.registerFactory(() => ListBlock(serLoc(),));
-    serLoc.registerFactory(() => SearchCubit());
+    serLoc.registerFactory(() => SearchCubit(serLoc(),));
 
 
 
