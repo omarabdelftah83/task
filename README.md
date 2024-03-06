@@ -1,7 +1,7 @@
-# technology used easy localization &restfull api &auth
+# task 
 
 
-A new Flutter project.
+technology used easy localization &restfull api &auth
 
 ## Getting Started
 
